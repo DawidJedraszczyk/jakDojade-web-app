@@ -65,9 +65,17 @@ function appendChildren(parent, children) {
 function createRouteDetails() {
   document.querySelectorAll(".route").forEach((element) => {
     element.addEventListener("click", function (event) {
-      result = element.lastChild.childNodes[1].textContent;
+      let result = element.lastChild.childNodes[1].textContent;
+      result = result.split(",");
+      //console.log(result);
       results = showRoute(result);
-      console.log(results);
+      //console.log(results);
+      let coordinates = [];
+      for (let i = 0; i < results.length; i++) {
+        coordinates.push([results[i][2][1], results[i][2][0]]);
+      }
+      console.log(coordinates);
+      drawRoute(coordinates);
     });
   });
 }

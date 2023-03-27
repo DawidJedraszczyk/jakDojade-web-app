@@ -42,7 +42,6 @@ class Graph(object):
     def return_hours(self, busName, stopName, direction):
         return self.busObjects[busName].return_hours(stopName, direction)
 
-
     def get_connected_stops(self, busName):
         matrix = (self.busObjects[busName].get_connected_stops())
         for index in matrix:
@@ -53,6 +52,19 @@ class Graph(object):
 
     def get_buses(self):
         return self.busesNames
+
+    def checkDepartureHours(self, busName, firstStation, direction, setMinHour, setMinMinute):
+        firstStationDepartureHours = self.return_hours(busName, firstStation, direction)
+
+        firstStationHour = 0
+        firstStationMinute = 0
+
+        for clock in firstStationDepartureHours:
+            firstStationHour = clock[0]
+            firstStationMinute = clock[1]
+            if (firstStationHour > setMinHour or (firstStationHour == setMinHour and firstStationMinute >= setMinMinute)):
+                break
+        return firstStationHour, firstStationMinute
 
     def get_all_stops(self):
         stops = []

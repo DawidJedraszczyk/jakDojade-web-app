@@ -7,16 +7,10 @@ L.tileLayer(
       '\u003ca href="https://www.maptiler.com/copyright/" target="_blank"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href="https://www.openstreetmap.org/copyright" target="_blank"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e',
   }
 ).addTo(map);
-//[51.6496, 17.8065]
 
-document.getElementById("search-btn").addEventListener("click", function () {
-  // Tworzenie punktów początkowego i końcowego
-  var start = L.latLng(51.652989, 17.830488);
-  var end = L.latLng(51.640066, 17.810563);
-
-  // Wyznaczanie trasy
+function drawRoute(array) {
   L.Routing.control({
-    waypoints: [start, end],
+    waypoints: array,
     show: false,
   }).addTo(map);
-});
+}

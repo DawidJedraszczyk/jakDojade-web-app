@@ -13,6 +13,9 @@ with open('static/python/addBusList.json', 'r') as file:
 
 with open('static/python/addStopsList.json', 'r', encoding='utf8') as file2:
     stopsArr = json.load(file2)
+
+with open('static/JSON/newJson.json', 'r', encoding='utf8') as file3:
+    latLen = json.load(file3)
 #creating city graph -> Graph(numberOfBusesInCity)
 
 ostrow = graph.Graph(2)
@@ -78,13 +81,37 @@ for index in range(len(busesArr['buses'])):
     ostrow.calculate_next_stops_hours(busName)
 
 #       MAIN
+def getPath(firstStation, goalStation, results):
+    data = {'firstBus': results[0], 'secondBus': results[5], 'secondStopName': results[10],
+            'timeOnTravel': [int(results[11]), int(results[12])],
+            'firstStationHour': [int(results[1]), int(results[2])], 'secondStationArrivalHour': [results[6], results[7]],
+            'secondStationDepartureHour': [results[8], results[9]],
+            'lastStationArivalHour': [int(results[3]), int(results[4])]}
+    output = [[firstStation, data['firstStationHour'], checkCoordinates(firstStation)]]
+    outputIndex = 0
+    if data['secondBus'] != '': #2 buses
+        print("na ten moment chuj")
+    else: #only one bus
+        firstDirection = ostrow.get_stops_dict(data['firstBus'], 1)
+        if firstDirection.index(firstStation) < firstDirection.index(goalStation):
+            direction = 1
+        else:
+            direction = 2
+        stops = ostrow.get_stops_dict(data['firstBus'], direction)
+        for i in range(stops.index(firstStation)+1, stops.index(goalStation)+1):
+            setMinHour = (output[outputIndex][1][0])
+            setMinMinute = (output[outputIndex][1][1])
+            outputIndex += 1
+            output.append([stops[i],ostrow.checkDepartureHours(data['firstBus'], stops[i], direction, setMinHour,setMinMinute), checkCoordinates(stops[i])])
+    return output
 
-def busDetails(busName):
-    index = 0
-    for i in range(len(arrays.addBusList)):
-        if arrays.addBusList[i][0] == busName:
-            index = i
-    return [arrays.dictionaries[2*index], arrays.dictionaries[2*index+1], arrays.addStopsList[index]]
+def checkCoordinates(stopName):
+    coordinates = [0,0]
+    for j in range(len(latLen["features"])):
+        if latLen["features"][j]["properties"]["name"] == stopName:
+            coordinates = latLen["features"][j]["geometry"]["coordinates"]
+            break
+    return coordinates
 
 def getHours(bus, stopName, currentlyClickedDirection):
     return(ostrow.return_hours(bus, stopName, currentlyClickedDirection))

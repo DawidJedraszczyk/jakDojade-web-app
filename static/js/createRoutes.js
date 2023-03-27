@@ -14,7 +14,6 @@ function createElements(array) {
   const container = document.getElementById("foundRoutes");
   //container.innerHTML += '<div id="back-btn">wstecz</div>';
   array.forEach(function (arrayElement) {
-    //console.log(arrayElement);
     const el = document.createElement("div");
     el.classList.add("route");
     if (arrayElement["firstStationHour"][0] > 9) {
@@ -54,7 +53,7 @@ function createElements(array) {
   </div>
   <div class="infoContainer">
     <div class="hiddenInfo">` +
-      arrayElement +
+      Object.values(arrayElement) +
       `</div>
     ` +
       buses +

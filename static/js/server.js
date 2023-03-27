@@ -47,7 +47,6 @@ function showRoute(res) {
   firstStation = document.getElementById("firstStation").value;
   goalStation = document.getElementById("goalStation").value;
   const dict_values = { firstStation, goalStation, res };
-  console.log(dict_values);
   const json_data = JSON.stringify(dict_values);
   let variants = $.ajax({
     url: "/showRoute",

@@ -150,6 +150,7 @@
 import graph
 import bubble
 
+
 def algorithm(firstStation, lastStation, hour, minute, maxTime, graph):
     busesListFirstStop = graph.get_other_buses_from_same_stop(firstStation)
     busesListLastStop = graph.get_other_buses_from_same_stop(lastStation)
