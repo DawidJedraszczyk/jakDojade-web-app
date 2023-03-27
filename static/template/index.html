@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sprawdź swojego busa</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/search.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/css/scheduleDetails.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.8.0/leaflet.css"
+    />
+    <link
+      href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.8.0/leaflet.js"></script>
+    <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.17/leaflet-maplibre-gl.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="mainContainer">
+      <div id="searchContainer" class="searchContainer">
+        <div id="optionNav" class="optionNav">
+          <div id="route-btn" class="route-btn">Znajdź trasę</div>
+          <div id="schedule-btn" class="schedule-btn">Rozkład jazdy</div>
+        </div>
+        <div id="back-btn"><img
+          id="back-icon"
+          src="/static/img/arrow-icon.svg"
+        />cofnij</div>
+        <div id="routeContainer" class="routeContainer">
+          <div class="form__group field">
+            <input
+              type="input"
+              class="form__field"
+              name="firstStation"
+              id="firstStation"
+              required
+            />
+            <label for="name" class="form__label">Przystanek początkowy</label>
+            <span class="suggestion" id="suggestionFirstStation"></span>
+          </div>
+          <div class="form__group field">
+            <input
+              type="input"
+              class="form__field"
+              name="goalStation"
+              id="goalStation"
+              required
+            />
+            <label for="name" class="form__label">Przystanek docelowy</label>
+            <span class="suggestion" id="suggestionSecondStation"></span>
+          </div>
+          <div class="form__group field">
+            <input
+              type="time"
+              class="form__field"
+              name="hour"
+              id="hour"
+              required
+            />
+            <label for="name" class="form__label">Godzina wyjazdu</label>
+          </div>
+          <div id="search-btn" class="search-btn">Szukaj</div>
+        </div>
+        <div id="foundRoutes"></div>
+        <div id="selectedRoute"></div>
+        <div id="scheduleContainer" class="scheduleContainer">
+          <div class="bus" id="busNr1">1</div>
+          <div class="bus" id="busNr2">2</div>
+          <div class="bus" id="busNr4">4</div>
+          <div class="bus" id="busNr5">5</div>
+          <div class="bus" id="busNr5B">5B</div>
+          <div class="bus" id="busNr6">6</div>
+          <div class="bus" id="busNr7">7</div>
+          <div class="bus" id="busNr8">8</div>
+          <div class="bus" id="busNr9">9</div>
+          <div class="bus" id="busNr10">10</div>
+          <div class="bus" id="busNr11">11</div>
+          <div class="bus" id="busNr12">12</div>
+          <div class="bus" id="busNr13">13</div>
+          <div class="bus" id="busNr14">14</div>
+          <div class="bus" id="busNr15">15</div>
+          <div class="bus" id="busNr16">16</div>
+          <div class="bus" id="busNr18">18</div>
+          <div class="bus" id="busNr19E">19E</div>
+          <div class="bus" id="busNr20">20</div>
+          <div class="bus" id="busNr21">21</div>
+          <div class="bus" id="busNr22">22</div>
+          <div class="bus" id="busNr25">25</div>
+          <div class="bus" id="busNrC">C</div>
+          <div class="bus" id="busNrK-1">K-1</div>
+          <div class="bus" id="busNrM">M</div>
+          <div class="bus" id="busNrP">P</div>
+        </div>
+        <div id="busDetails"></div>
+        <img
+          id="arrow-icon"
+          class="arrow-icon"
+          src="/static/img/arrow-icon.svg"
+        />
+      </div>
+      <div id="departureHours"></div>
+      <div id="map"></div>
+      </script>
+    </div>
+    <script src="/static/js/index.js"></script>
+    <script src="/static/js/server.js"></script>
+    <script src="/static/js/map.js"></script>
+    <script src="/static/js/createRoutes.js"></script>
+    <script src="/static/js/showScheduleDetails.js"></script>
+    <script src="/static/js/predictingInput.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <!--
+      <script
+      src="/static/js/createSelectedRoute.js"
+    ></script>
+    -->
+  </body>
+</html>

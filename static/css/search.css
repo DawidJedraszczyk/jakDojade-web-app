@@ -1,0 +1,107 @@
+:root {
+  --cyan: #11998e;
+  --green: #38ef7d;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #222 inset !important;
+}
+.suggestion {
+  white-space: nowrap;
+  font-family: inherit;
+  font-weight: bold;
+  outline: 0;
+  font-size: 1.3rem;
+  -webkit-text-fill-color: #747171 !important;
+  z-index: -1;
+  position: absolute;
+  top: 22px;
+  left: 0px;
+}
+
+input:-webkit-autofill {
+  font-size: 1.3rem;
+  -webkit-text-fill-color: white !important;
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: brightness(0) invert(1);
+}
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+}
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1.3rem;
+  color: #fff;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+.form__field::placeholder {
+  color: transparent;
+}
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px;
+}
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, var(--cyan), var(--green));
+  border-image-slice: 1;
+}
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: var(--cyan);
+  font-weight: 700;
+}
+/* reset input */
+.form__field:required,
+.form__field:invalid {
+  box-shadow: none;
+}
+/* demo */
+
+.search-btn {
+  width: 50px;
+  cursor: pointer;
+  margin-top: 30px;
+  color: white;
+}
+
+.search-btn:hover,
+.search-btn:focus {
+  color: var(--cyan);
+}
+
+@media screen and (max-width: 1260px) {
+}
+@media screen and (max-width: 1004px) {
+}
+@media screen and (max-width: 768px) {
+}
+@media screen and (max-width: 320px) {
+}
