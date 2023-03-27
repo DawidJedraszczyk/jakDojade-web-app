@@ -13,12 +13,12 @@ function findLatLen(stopName) {
   }
 }
  */
-document.getElementById("search-btn").addEventListener("click", searchClicked);
+/* document.getElementById("search-btn").addEventListener("click", searchClicked);
 function searchClicked() {
   results = findRoute();
   createElements(results); //function from createRoutes
-}
-document.body.addEventListener("click", function (event) {
+} */
+/* document.body.addEventListener("click", function (event) {
   //for (let elem = 0; elem < event.path.length; elem++) {
   if (event.target.className == "infoContainer") {
     result = event.target.firstElementChild.innerHTML;
@@ -37,16 +37,17 @@ document.body.addEventListener("click", function (event) {
   } else if (event.target.className == "deportureTime") {
     result = event.path[1].children[1].children[0].innerHTML;
   }
-  //console.log(result);
+  console.log(result);
   results = showRoute(result);
   //console.log(results);
   createRoute(results);
-});
+}); */
 
 function showRoute(res) {
   firstStation = document.getElementById("firstStation").value;
   goalStation = document.getElementById("goalStation").value;
   const dict_values = { firstStation, goalStation, res };
+  console.log(dict_values);
   const json_data = JSON.stringify(dict_values);
   let variants = $.ajax({
     url: "/showRoute",

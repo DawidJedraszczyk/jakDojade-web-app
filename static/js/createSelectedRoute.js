@@ -1,4 +1,4 @@
-function createRoute(route) {
+/* function createRoute(route) {
   $("#selectedRoute").empty();
   document.getElementById("foundRoutes").style.visibility = "hidden";
   let container = document.getElementById("selectedRoute");
@@ -59,5 +59,15 @@ function createElement(text) {
 function appendChildren(parent, children) {
   children.forEach(function (child) {
     parent.appendChild(child);
+  });
+}
+ */
+function createRouteDetails() {
+  document.querySelectorAll(".route").forEach((element) => {
+    element.addEventListener("click", function (event) {
+      result = element.lastChild.childNodes[1].textContent;
+      results = showRoute(result);
+      console.log(results);
+    });
   });
 }

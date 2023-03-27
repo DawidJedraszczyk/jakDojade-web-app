@@ -222,7 +222,7 @@ def algorithm(firstStation, lastStation, hour, minute, maxTime, graph):
                     lastStationHour += 1
                     lastStationMinute -= 60
                 travelTimeHour, travelTimeMinute = sumUpTravelTime(lastStationHour, lastStationMinute, firstStationHour, firstStationMinute)
-                solution = [option, None, None, None, None, [travelTimeHour, travelTimeMinute],[firstStationHour, firstStationMinute],[None,None],[None, None], [None, None], [None, None], [lastStationHour, lastStationMinute]]
+                solution = {'firstBus': option, 'secondBus': None, 'secondStopName': None, 'timeOnTravel': [travelTimeHour, travelTimeMinute],'firstStationHour':[firstStationHour, firstStationMinute],'secondStationArrivalHour': [None,None],'secondStationDepartureHour': [None, None],'lastStationArivalHour': [lastStationHour, lastStationMinute]}
                 if solution not in solutions:
                     solutions.append(solution)
             solutionsFound += 1
@@ -261,7 +261,7 @@ def algorithm(firstStation, lastStation, hour, minute, maxTime, graph):
                         lastStationHourArrival, lastStationMinuteArrival = checkDepartureHours(secondBus, lastStation, secondBusDirection, tmpHour, tmpMinute)
                         travelTimeHour, travelTimeMinute = sumUpTravelTime(lastStationHourArrival, lastStationMinuteArrival, firstStationHour, firstStationMinute)
 
-                        solutions.append([busName, secondBus, secondStopName, None, None, [travelTimeHour, travelTimeMinute],[firstStationHour, firstStationMinute],[secondStationHourArrival,secondStationMinuteArrival],[secondStationHourDeparture, secondStationMinuteDeparture], [None, None], [None, None], [lastStationHourArrival, lastStationMinuteArrival]])
+                        solutions.append({'firstBus': busName, 'secondBus':secondBus, 'secondStopName': secondStopName, 'timeOnTravel': [travelTimeHour, travelTimeMinute], 'firstStationHour': [firstStationHour, firstStationMinute],'secondStationArrivalHour': [secondStationHourArrival,secondStationMinuteArrival],'secondStationDepartureHour': [secondStationHourDeparture, secondStationMinuteDeparture], 'lastStationArivalHour':[lastStationHourArrival, lastStationMinuteArrival]})
                 #if not secondOption:
                 #    for secondBusName in busList:           # PIERWSZA PRZESIADKA
                 #        if secondBusName != busName:

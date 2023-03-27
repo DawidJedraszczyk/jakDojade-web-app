@@ -1,9 +1,10 @@
 document.getElementById("search-btn").addEventListener("click", function () {
-  document.getElementById("back-btn").addEventListener("click", backFunction);
+  results = findRoute();
+  createElements(results);
   document.getElementById("routeContainer").style.display = "none";
   document.getElementById("foundRoutes").style.display = "block";
   document.getElementById("back-btn").style.display = "block";
-
+  createRouteDetails();
   let backBtn = document.getElementById("back-btn");
   backBtn.addEventListener("click", backFunctionRoutes);
 });
@@ -16,19 +17,19 @@ function createElements(array) {
     //console.log(arrayElement);
     const el = document.createElement("div");
     el.classList.add("route");
-    if (arrayElement[6][0] > 9) {
-      var deportureHour = arrayElement[6][0];
+    if (arrayElement["firstStationHour"][0] > 9) {
+      var deportureHour = arrayElement["firstStationHour"][0];
     } else {
-      var deportureHour = "0" + arrayElement[6][0];
+      var deportureHour = "0" + arrayElement["firstStationHour"][0];
     }
-    if (arrayElement[6][1] > 9) {
-      var deportureMinute = arrayElement[6][1];
+    if (arrayElement["firstStationHour"][1] > 9) {
+      var deportureMinute = arrayElement["firstStationHour"][1];
     } else {
-      var deportureMinute = "0" + arrayElement[6][1];
+      var deportureMinute = "0" + arrayElement["firstStationHour"][1];
     }
-    if (arrayElement[1] != null) {
-      var busNr1 = arrayElement[0].split("r");
-      var busNr2 = arrayElement[1].split("r");
+    if (arrayElement["secondBus"] != null) {
+      var busNr1 = arrayElement["firstBus"].split("r");
+      var busNr2 = arrayElement["secondBus"].split("r");
       var buses =
         '<div class="buses"><div class="busImgAndNumber"><img id="id1" src="/static/img/bus-icon.svg" /><p class="busesP">' +
         busNr1[1] +
@@ -36,7 +37,7 @@ function createElements(array) {
         busNr2[1] +
         "</p></div></div>";
     } else {
-      var busNr1 = arrayElement[0].split("r");
+      var busNr1 = arrayElement["firstBus"].split("r");
       var buses =
         '<div class="buses"><div class="busImgAndNumber"><img id="id1" src="/static/img/bus-icon.svg" /><p class="busesP">' +
         busNr1[1] +
@@ -65,14 +66,14 @@ function createElements(array) {
       deportureMinute +
       `</p>
       <p class="hoursP">` +
-      arrayElement[11][0] +
+      arrayElement["lastStationArivalHour"][0] +
       ":" +
-      arrayElement[11][1] +
+      arrayElement["lastStationArivalHour"][1] +
       `</p>
       ` +
-      arrayElement[5][0] +
+      arrayElement["timeOnTravel"][0] +
       ":" +
-      arrayElement[5][1] +
+      arrayElement["timeOnTravel"][1] +
       `
     </div>`;
     container.appendChild(el);

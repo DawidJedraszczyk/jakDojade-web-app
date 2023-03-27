@@ -25,8 +25,6 @@ if __name__ == "__main__":
         goalStation = result['goalStation']
         hourTMP = result['hour']
         hour = hourTMP.split(":")
-
-        #mainFile.algorithmToWeb.algorithm('Centrum przesiadkowe', 'Odolanowska I', 15, 36, 100, ostrow)
         options = mainFile.algorithmToWeb.algorithm(firstStation, goalStation, int(hour[0]), int(hour[1]), 100, ostrow)
         #print(options)
         return options
@@ -38,6 +36,7 @@ if __name__ == "__main__":
         goalStation = result['goalStation']
         results = result['res']
         res = results.split(",")
+        print(res)
         if (len(res[9]) > 0):
             opt = 0
             output = [res[0], res[1], res[2], None, None, [int(res[5]), int(res[6])], [
@@ -70,10 +69,7 @@ if __name__ == "__main__":
         direction = result['direction']
         options = mainFile.getHours(busName, stopName, direction)
         return options
-
-    if __name__ == "__main__":
-        app.run()
-    else:
-        app.config.update(
-            APPLICATION_ROOT='/',
-        )
+else:
+    app.config.update(
+        APPLICATION_ROOT='/',
+    )

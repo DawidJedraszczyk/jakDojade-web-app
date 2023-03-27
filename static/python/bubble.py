@@ -13,10 +13,10 @@ def bubbleSort(arr):
             # traverse the array from 0 to n-i-1
             # Swap if the element found is greater
             # than the next element
-            if arr[j][11][0] > arr[j + 1][11][0]:
+            if arr[j]["lastStationArivalHour"][0] > arr[j + 1]["lastStationArivalHour"][0]:
                 swapped = True
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
-            elif arr[j][11][0] == arr[j + 1][11][0] and arr[j][11][1] > arr[j + 1][11][1]:
+            elif arr[j]["lastStationArivalHour"][0] == arr[j + 1]["lastStationArivalHour"][0] and arr[j]["lastStationArivalHour"][1] > arr[j + 1]["lastStationArivalHour"][1]:
                 swapped = True
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
 
