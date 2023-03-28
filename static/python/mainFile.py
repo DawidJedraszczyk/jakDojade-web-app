@@ -87,10 +87,36 @@ def getPath(firstStation, goalStation, results):
             'firstStationHour': [int(results[1]), int(results[2])], 'secondStationArrivalHour': [results[6], results[7]],
             'secondStationDepartureHour': [results[8], results[9]],
             'lastStationArivalHour': [int(results[3]), int(results[4])]}
-    output = [[firstStation, data['firstStationHour'], checkCoordinates(firstStation)]]
     outputIndex = 0
+    bus1 = [[firstStation, data['firstStationHour'], checkCoordinates(firstStation)]]
+    bus2 = [[data["secondStopName"], data["secondStationDepartureHour"], checkCoordinates(data["secondStopName"])]]
     if data['secondBus'] != '': #2 buses
-        print("na ten moment chuj")
+        firstDirection = ostrow.get_stops_dict(data['firstBus'],1)
+        if firstDirection.index(firstStation) < firstDirection.index(data['secondStopName']):
+            direction = 1
+        else:
+            direction = 2
+        stops = ostrow.get_stops_dict(data['firstBus'], direction)
+        for i in range(stops.index(firstStation) + 1, stops.index(data['secondStopName']) + 1):
+            setMinHour = (bus1[outputIndex][1][0])
+            setMinMinute = (bus1[outputIndex][1][1])
+            outputIndex += 1
+            bus1.append([stops[i], ostrow.checkDepartureHours(data['firstBus'], stops[i], direction, setMinHour, setMinMinute),checkCoordinates(stops[i])])
+        secondDirection = ostrow.get_stops_dict(data['secondBus'], 1)
+        if secondDirection.index(data['secondStopName']) < secondDirection.index(goalStation):
+            direction = 1
+        else:
+            direction = 2
+        stops = ostrow.get_stops_dict(data['secondBus'], direction)
+        outputIndex = 0
+        for i in range(stops.index(data['secondStopName']) + 1, stops.index(goalStation) + 1):
+            setMinHour = int(bus2[outputIndex][1][0])
+            setMinMinute = int(bus2[outputIndex][1][1])
+            outputIndex += 1
+            bus2.append(
+                [stops[i], ostrow.checkDepartureHours(data['secondBus'], stops[i], direction, setMinHour, setMinMinute),
+                 checkCoordinates(stops[i])])
+        return [bus1, bus2]
     else: #only one bus
         firstDirection = ostrow.get_stops_dict(data['firstBus'], 1)
         if firstDirection.index(firstStation) < firstDirection.index(goalStation):
@@ -99,17 +125,17 @@ def getPath(firstStation, goalStation, results):
             direction = 2
         stops = ostrow.get_stops_dict(data['firstBus'], direction)
         for i in range(stops.index(firstStation)+1, stops.index(goalStation)+1):
-            setMinHour = (output[outputIndex][1][0])
-            setMinMinute = (output[outputIndex][1][1])
+            setMinHour = (bus1[outputIndex][1][0])
+            setMinMinute = (bus1[outputIndex][1][1])
             outputIndex += 1
-            output.append([stops[i],ostrow.checkDepartureHours(data['firstBus'], stops[i], direction, setMinHour,setMinMinute), checkCoordinates(stops[i])])
-    return output
+            bus1.append([stops[i],ostrow.checkDepartureHours(data['firstBus'], stops[i], direction, setMinHour,setMinMinute), checkCoordinates(stops[i])])
+        return [bus1, []]
 
 def checkCoordinates(stopName):
     coordinates = [0,0]
     for j in range(len(latLen["features"])):
         if latLen["features"][j]["properties"]["name"] == stopName:
-            coordinates = latLen["features"][j]["geometry"]["coordinates"]
+            coordinates = [latLen["features"][j]["geometry"]["coordinates"][1], latLen["features"][j]["geometry"]["coordinates"][0]]
             break
     return coordinates
 

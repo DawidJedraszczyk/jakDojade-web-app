@@ -49,7 +49,10 @@ def postSchedule():
     for i in range(len(arrays.addBusList)):
         if arrays.addBusList[i][0] == bus:
             index = i
-    return [arrays.dictionaries[2 * index], arrays.dictionaries[2 * index + 1], arrays.addStopsList[index]]
+    stopsCoordinates = []
+    for stopName in arrays.addStopsList[index]:
+        stopsCoordinates.append(mainFile.checkCoordinates(stopName))
+    return [[arrays.dictionaries[2 * index], arrays.dictionaries[2 * index + 1], arrays.addStopsList[index]],stopsCoordinates]
 
 
 @app.route('/getDepartureHours', methods=['POST'])

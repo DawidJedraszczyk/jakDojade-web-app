@@ -65,16 +65,17 @@ function appendChildren(parent, children) {
 function createRouteDetails() {
   document.querySelectorAll(".route").forEach((element) => {
     element.addEventListener("click", function (event) {
+      detailsContainer = document.getElementById("departureHours");
+      detailsContainer.style.display = "flex";
       let result = element.lastChild.childNodes[1].textContent;
       result = result.split(",");
-      //console.log(result);
       results = showRoute(result);
-      //console.log(results);
-      let coordinates = [];
+      let coordinates = [[], []];
       for (let i = 0; i < results.length; i++) {
-        coordinates.push([results[i][2][1], results[i][2][0]]);
+        for (let j = 0; j < results[i].length; j++) {
+          coordinates[i].push(results[i][j][2]);
+        }
       }
-      console.log(coordinates);
       drawRoute(coordinates);
     });
   });

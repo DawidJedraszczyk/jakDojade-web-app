@@ -3,7 +3,6 @@ issues:
 frontend:
 asynchronicznosc server.js/createRoutes/createSelectedRoutes
 sprawdzenie createSelectedRoutes
-mapa ???
 cofanie sie
 
 backend:
@@ -12,5 +11,4 @@ wyszukiwanie po adresie zamieszkania
 
 
 ogolnie:
-stworzenie struktury plikow
 napisac do mzk o rozklad jazdy

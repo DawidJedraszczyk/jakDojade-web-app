@@ -13,7 +13,9 @@ for (let i = 0; i < busClass.length; i++) {
     backBtn.style.display = "block";
     backBtn.style.marginLeft = "25px";
     results = findBusDetails(clickedBus);
-    createBusDetails(clickedBus, busNumber, results);
+    let busStopsCoordinates = [results[1], []];
+    drawRoute(busStopsCoordinates);
+    createBusDetails(clickedBus, busNumber, results[0]);
     backBtn.addEventListener("click", backFunction);
   });
 }
@@ -154,7 +156,7 @@ function createDepartureHours(busName, stopName, dir, listOfHours) {
     '<div class="directionModal"><img src="/static/img/direction.png" style="width: 20px; height: 20px;"/>' +
     direction +
     "</div>" +
-    '<div class="stopNameModal"><img src="/static/img/bus-stop.png" style="width: 20px; height: 20px;"/>' +
+    '<div class="stopNameModal"><img src="/static/img/bus-stop-white.png" style="width: 24px; height: 23px;"/>' +
     stopName +
     '</div><img id="arrow-icon-hours" class="arrow-icon" src="/static/img/arrow-icon.svg"/>';
   for (let i = 0; i < listOfHours.length; i++) {
