@@ -65,11 +65,11 @@ function appendChildren(parent, children) {
 function createRouteDetails() {
   document.querySelectorAll(".route").forEach((element) => {
     element.addEventListener("click", function (event) {
-      detailsContainer = document.getElementById("departureHours");
-      detailsContainer.style.display = "flex";
       let result = element.lastChild.childNodes[1].textContent;
       result = result.split(",");
+      console.log(result);
       results = showRoute(result);
+      showDetails(results, result[0], result[5]);
       let coordinates = [[], []];
       for (let i = 0; i < results.length; i++) {
         for (let j = 0; j < results[i].length; j++) {
@@ -79,4 +79,58 @@ function createRouteDetails() {
       drawRoute(coordinates);
     });
   });
+}
+
+function showDetails(stopsData, firstBus, secondBus) {
+  firstBus = firstBus.split("r")[1];
+  secondBus = secondBus.split("r")[1];
+  console.log(stopsData, firstBus, secondBus);
+  let detailsContainer = document.getElementById("departureHours");
+  let firstBusModal =
+    '<div class="busModal" id="firstBusModal"><div class="headerModal"><img src="static/img/bus-icon.png" style="width: 20px; height: 20px;"/>' +
+    firstBus +
+    "</div><div id='dataFirstBus'></div></div>";
+  let secondBusModal =
+    '<div class="busModal" id="secondBusModal"><div class="headerModal"><img src="static/img/bus-icon.png" style="width: 20px; height: 20px;"/>' +
+    secondBus +
+    "</div><div id='dataSecondBus'></div></div>";
+  detailsContainer.innerHTML = "";
+  if (secondBus) {
+    detailsContainer.innerHTML +=
+      firstBusModal +
+      secondBusModal +
+      '<img id="arrow-icon-hours" class="arrow-icon" src="static/img/arrow-icon.svg"/>';
+  } else {
+    detailsContainer.innerHTML +=
+      firstBusModal +
+      '<img id="arrow-icon-hours" class="arrow-icon" src="static/img/arrow-icon.svg"/>';
+  }
+  for (let i = 0; i < stopsData[0].length; i++) {
+    document.getElementById("dataFirstBus").innerHTML +=
+      "<p>" +
+      stopsData[0][i][1][0] +
+      ":" +
+      stopsData[0][i][1][1] +
+      " " +
+      stopsData[0][i][0] +
+      "</p>";
+  }
+  if (secondBus) {
+    for (let i = 0; i < stopsData[1].length; i++) {
+      document.getElementById("dataSecondBus").innerHTML +=
+        "<p>" +
+        stopsData[1][i][1][0] +
+        ":" +
+        stopsData[1][i][1][1] +
+        " " +
+        stopsData[1][i][0] +
+        "</p>";
+    }
+  }
+  detailsContainer.style.display = "flex";
+  document
+    .getElementById("arrow-icon-hours")
+    .addEventListener("click", function () {
+      detailsContainer.style.display = "none";
+    });
 }

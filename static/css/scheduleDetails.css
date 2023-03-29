@@ -53,7 +53,27 @@
   border: 1px var(--cyan) solid;
   background-color: var(--cyan);
 }
-
+.busModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  cursor: default;
+  font-size: 20px;
+  color: white;
+  width: 80%;
+  margin-bottom: 50px;
+}
+.headerModal {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  color: white;
+  margin-bottom: 10px;
+}
+.busModal img {
+  margin: 7px 5px 0px 0px;
+}
 .selectRoute img {
   width: 13x;
   height: 13px;

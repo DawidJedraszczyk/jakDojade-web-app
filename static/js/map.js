@@ -29,7 +29,6 @@ const icon = L.icon({
 });
 
 function drawRoute(array) {
-  console.log("CHUj");
   removeRoutingControl();
   routingControlFirstBus = L.Routing.control({
     waypoints: array[0],
