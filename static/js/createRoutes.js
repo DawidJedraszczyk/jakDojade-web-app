@@ -42,41 +42,50 @@ function createElements(array) {
         busNr1[1] +
         "</p></div></div>";
     }
+    let lastStationArivalHour = arrayElement["lastStationArivalHour"][0];
+    let lastStationArivalMinute = arrayElement["lastStationArivalHour"][1];
+    let timeOnTravelHours = arrayElement["timeOnTravel"][0];
+    let timeOnTravelMinute = arrayElement["timeOnTravel"][1];
+    lastStationArivalHour = checkIfTimeOver9(lastStationArivalHour);
+    lastStationArivalMinute = checkIfTimeOver9(lastStationArivalMinute);
+    timeOnTravelMinute = checkIfTimeOver9(timeOnTravelMinute);
     el.innerHTML =
       `<div class="deportureTime">
-    Odjazd o:
-    <h1 class="deportureTimeH1">` +
+      Odjazd o:
+      <h1 class="deportureTimeH1">` +
       deportureHour +
       ":" +
       deportureMinute +
       `</h1>
-  </div>
-  <div class="infoContainer">
-    <div class="hiddenInfo">` +
+    </div>
+    <div class="infoContainer">
+      <div class="hiddenInfo">` +
       Object.values(arrayElement) +
       `</div>
-    ` +
+      ` +
       buses +
       `
-    <div class="hours">
-      <p class="hoursP">` +
+      <div class="hours">
+        <p class="hoursP">` +
       deportureHour +
       ":" +
       deportureMinute +
       `</p>
-      <p class="hoursP">` +
-      arrayElement["lastStationArivalHour"][0] +
+        <p class="hoursP">` +
+      lastStationArivalHour +
       ":" +
-      arrayElement["lastStationArivalHour"][1] +
+      lastStationArivalMinute +
       `</p>
-      ` +
-      arrayElement["timeOnTravel"][0] +
+        ` +
+      timeOnTravelHours +
       ":" +
-      arrayElement["timeOnTravel"][1] +
+      timeOnTravelMinute +
       `
-    </div>`;
+      </div>`;
+
     container.appendChild(el);
   });
+
   document.getElementById("foundRoutes").style.visibility = "visible";
 }
 
@@ -87,4 +96,11 @@ function backFunctionRoutes() {
   document
     .getElementById("back-btn")
     .removeEventListener("click", backFunctionRoutes);
+}
+
+function checkIfTimeOver9(time) {
+  if (time <= 9) {
+    time = "0" + time;
+  }
+  return time;
 }

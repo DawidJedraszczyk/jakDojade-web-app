@@ -9,19 +9,24 @@ function changeHiddenClass() {
     document.getElementById("scheduleContainer").className =
       "scheduleContainer__hidden";
     document.getElementById("arrow-icon").className = "arrow-icon__hidden";
+    document.getElementById("arrow-icon").style.zIndex = 2;
+    //document.getElementById("arrow-icon").style.display = "none";
     document.getElementById("searchContainer").className =
       "searchContainer__hidden";
-    document.getElementById("departureHours").style.display = "none";
+    document.getElementById("departureHours").style.left = "0px";
   } else {
     document.getElementById("optionNav").className = "optionNav";
     document.getElementById("routeContainer").className = "routeContainer";
     document.getElementById("scheduleContainer").className =
       "scheduleContainer";
+    document.getElementById("arrow-icon-hours").style.display = "block";
+    document.getElementById("departureHours").style.left = "520px";
     document.getElementById("arrow-icon").className = "arrow-icon";
     document.getElementById("searchContainer").className = "searchContainer";
   }
 }
 function changeCurrentlyClicked(clicked) {
+  document.getElementById("back-btn").style.display = "none";
   if (clicked === "schedule-btn") {
     document.getElementById("schedule-btn").style.color = "white";
     document.getElementById("route-btn").style.color = "#9b9b9b";
