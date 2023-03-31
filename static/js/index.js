@@ -10,7 +10,6 @@ function changeHiddenClass() {
       "scheduleContainer__hidden";
     document.getElementById("arrow-icon").className = "arrow-icon__hidden";
     document.getElementById("arrow-icon").style.zIndex = 2;
-    //document.getElementById("arrow-icon").style.display = "none";
     document.getElementById("searchContainer").className =
       "searchContainer__hidden";
     document.getElementById("departureHours").style.left = "0px";
@@ -19,10 +18,9 @@ function changeHiddenClass() {
     document.getElementById("routeContainer").className = "routeContainer";
     document.getElementById("scheduleContainer").className =
       "scheduleContainer";
-    document.getElementById("arrow-icon-hours").style.display = "block";
+    document.getElementById("searchContainer").className = "searchContainer";
     document.getElementById("departureHours").style.left = "520px";
     document.getElementById("arrow-icon").className = "arrow-icon";
-    document.getElementById("searchContainer").className = "searchContainer";
   }
 }
 function changeCurrentlyClicked(clicked) {
@@ -52,7 +50,8 @@ function changeVisibilityInSearchContainer(clicked) {
 }
 
 window.onload = function () {
-  document.querySelector(".arrow-icon").addEventListener("click", function () {
+  document.getElementById("arrow-icon").addEventListener("click", function () {
+    console.log("CHUJ DUPA CYCE");
     if (hiddenStatus) {
       hiddenStatus = false;
     } else {

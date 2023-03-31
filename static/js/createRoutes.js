@@ -12,7 +12,10 @@ document.getElementById("search-btn").addEventListener("click", function () {
 function createElements(array) {
   $("#foundRoutes").empty();
   const container = document.getElementById("foundRoutes");
-  //container.innerHTML += '<div id="back-btn">wstecz</div>';
+  if (array.length == 0) {
+    container.innerHTML =
+      "<p style='color: white; margin: 0px auto; font-size'>Nie znaleziono dojazdu...";
+  }
   array.forEach(function (arrayElement) {
     const el = document.createElement("div");
     el.classList.add("route");

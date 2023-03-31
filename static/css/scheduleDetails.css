@@ -101,3 +101,11 @@
 .stopName:hover {
   color: var(--cyan);
 }
+@media screen and (max-width: 1200px) {
+}
+@media screen and (max-width: 1000px) {
+  .scheduleContainer {
+    top: calc(12%);
+    overflow: auto;
+  }
+}

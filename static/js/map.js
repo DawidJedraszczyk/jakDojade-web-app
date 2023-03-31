@@ -39,7 +39,7 @@ function drawRoute(array) {
     show: false,
     createMarker: function (i, wp) {
       return L.marker(wp.latLng, {
-        draggable: true,
+        draggable: false,
         icon,
       });
     },
@@ -53,7 +53,7 @@ function drawRoute(array) {
     show: false,
     createMarker: function (i, wp) {
       return L.marker(wp.latLng, {
-        draggable: true,
+        draggable: false,
         icon,
       });
     },

@@ -1,67 +1,3 @@
-/* function createRoute(route) {
-  $("#selectedRoute").empty();
-  document.getElementById("foundRoutes").style.visibility = "hidden";
-  let container = document.getElementById("selectedRoute");
-  let el = document.createElement("div");
-  if (route[1].length > 0) {
-    var busNr1 = route[0][0].split("r");
-    var busNr2 = route[1][0].split("r");
-  } else {
-    var busNr1 = route[0][0].split("r");
-  }
-  console.log(route);
-  //for (let i = 0; i < route[0][1].length; i++) {
-  //  console.log(route[0][1][i]);
-  //}
-  el.innerHTML =
-    `<div class="busInformations"><img src="../img/arrow-icon.svg" /><div class="busName">` +
-    busNr1[1] +
-    `</div>` +
-    route[0][1][route[0][1].length - 1][1] +
-    `</div>`;
-  var items = [];
-  for (let i = 0; i < route[0][1].length; i++) {
-    elem = createElement(
-      route[0][1][i][0][0] + ":" + route[0][1][i][0][1] + route[0][1][i][1]
-    );
-    items.push(elem);
-  }
-  appendChildren(el, items);
-  container.appendChild(el);
-  if (busNr2) {
-    let el = document.createElement("div");
-    el.innerHTML =
-      `<div class="busInformations"><img src="../img/arrow-icon.svg" /><div class="busName">` +
-      busNr2[1] +
-      `</div>` +
-      route[1][1][route[1][1].length - 1][1] +
-      `</div>`;
-    var items = [];
-    for (let i = 0; i < route[1][1].length; i++) {
-      elem = createElement(
-        route[1][1][i][0][0] + ":" + route[1][1][i][0][1] + route[1][1][i][1]
-      );
-      items.push(elem);
-    }
-    appendChildren(el, items);
-    container.appendChild(el);
-  }
-  //container.appendChild(el);
-  document.getElementById("selectedRoute").style.visibility = "visible";
-}
-
-function createElement(text) {
-  var p = document.createElement("p");
-  p.textContent = text;
-  return p;
-}
-
-function appendChildren(parent, children) {
-  children.forEach(function (child) {
-    parent.appendChild(child);
-  });
-}
- */
 function createRouteDetails() {
   document.querySelectorAll(".route").forEach((element) => {
     element.addEventListener("click", function (event) {
@@ -93,16 +29,13 @@ function showDetails(stopsData, firstBus, secondBus) {
     secondBus +
     "</div><div id='dataSecondBus'></div></div></div>";
   detailsContainer.innerHTML = "";
-  if (secondBus) {
-    detailsContainer.innerHTML +=
-      firstBusModal +
-      secondBusModal +
-      '<img id="arrow-icon-hours" class="arrow-icon" src="static/img/arrow-icon.svg"/>';
+  if (secondBus != undefined) {
+    detailsContainer.innerHTML += firstBusModal + secondBusModal;
   } else {
-    detailsContainer.innerHTML +=
-      firstBusModal +
-      '<img id="arrow-icon-hours" class="arrow-icon" src="static/img/arrow-icon.svg"/>';
+    detailsContainer.innerHTML += firstBusModal;
   }
+  detailsContainer.innerHTML +=
+    '<img id="arrow-icon-hours" class="arrow-icon" src="static/img/arrow-icon.svg"/>';
   for (let i = 0; i < stopsData[0].length; i++) {
     if (stopsData[0][i][1][0] > 9 && stopsData[0][i][1][1] > 9) {
       document.getElementById("dataFirstBus").innerHTML +=
@@ -182,11 +115,11 @@ function showDetails(stopsData, firstBus, secondBus) {
           "</p>";
       }
     }
-    detailsContainer.style.display = "flex";
+    detailsContainer.style.width = "420px";
     document
       .getElementById("arrow-icon-hours")
       .addEventListener("click", function () {
-        detailsContainer.style.display = "none";
+        detailsContainer.style.width = "0px";
       });
   }
 }

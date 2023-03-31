@@ -99,19 +99,20 @@ body {
   z-index: 1;
   background-color: var(--background);
 }
-
 #departureHours {
-  display: none;
+  display: flex;
+  transition: width 0.2s;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
+  width: 0px;
   left: 520px;
-  width: 450px;
   height: 100%;
   background-color: #353434;
   z-index: 1;
 }
+
 .busModalsContainer {
   display: flex;
   flex-direction: column;
@@ -146,6 +147,7 @@ body {
 
 #foundRoutes {
   font-size: 20px;
+  color: white;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -319,8 +321,77 @@ body {
   background-color: var(--cyan);
   border: solid 1px var(--cyan);
 }
+@media screen and (max-width: 1200px) {
+  #departureHours {
+  }
+}
+@media screen and (max-width: 1000px) {
+  .mainContainer {
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #foundRoutes {
+    top: 50px;
+  }
+  .searchContainer {
+    width: 100vw;
+    position: absolute;
+    top: 0px;
+    height: 380px;
+  }
+  .routeContainer,
+  .scheduleContainer {
+    position: absolute;
+    top: 50px;
+  }
+  .scheduleContainer {
+    width: 300px;
+    height: 250px;
+    overflow-y: auto;
+  }
+  .arrow-icon {
+    rotate: 0deg;
+    top: 325px;
+    left: calc(50% - 15px);
+  }
 
-@media screen and (max-width: 768px) {
+  #selectedRoute {
+    margin-top: 20px;
+    height: 60%;
+  }
+
+  /*when search bar hidden*/
+  .searchContainer__hidden {
+    width: 100%;
+    height: 100px;
+  }
+  .optionNav__hidden,
+  .routeContainer__hidden,
+  .scheduleContainer__hidden {
+    display: none;
+  }
+
+  .arrow-icon__hidden {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: var(--cyan);
+    border: solid 1px var(--cyan);
+    border-radius: 30px;
+    rotate: -180deg;
+    left: calc(50% - 15px);
+    top: 20px;
+    z-index: 1;
+  }
+  .arrow-icon__hidden:hover,
+  .arrow-icon__hidden:focus {
+    cursor: pointer;
+    background-color: var(--cyan);
+    border: solid 1px var(--cyan);
+  }
+}
+@media screen and (max-width: 1000px) {
   .mainContainer {
     position: relative;
     flex-direction: column;
@@ -382,6 +453,4 @@ body {
     background-color: var(--cyan);
     border: solid 1px var(--cyan);
   }
-}
-@media screen and (max-width: 360px) {
 }
