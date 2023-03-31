@@ -331,8 +331,12 @@ body {
     flex-direction: column;
     justify-content: center;
   }
+  #departureHours {
+  }
   #foundRoutes {
-    top: 50px;
+    top: 70px;
+    width: auto;
+    height: 70%;
   }
   .searchContainer {
     width: 100vw;
@@ -364,7 +368,7 @@ body {
   /*when search bar hidden*/
   .searchContainer__hidden {
     width: 100%;
-    height: 100px;
+    height: 0px;
   }
   .optionNav__hidden,
   .routeContainer__hidden,
@@ -389,68 +393,26 @@ body {
     cursor: pointer;
     background-color: var(--cyan);
     border: solid 1px var(--cyan);
+  }
+
+  #back-btn {
+    left: 20px;
+    top: 45px;
   }
 }
-@media screen and (max-width: 1000px) {
-  .mainContainer {
-    position: relative;
-    flex-direction: column;
-    justify-content: center;
+@media screen and (max-width: 500px) {
+  #back-btn {
+    left: 20px;
+    top: 45px;
   }
-  .searchContainer {
-    width: 100vw;
-    position: absolute;
-    top: 0px;
-    height: 380px;
-  }
-  .routeContainer,
-  .scheduleContainer {
-    position: absolute;
-    top: 50px;
-  }
-  .scheduleContainer {
-    width: 300px;
-    height: 250px;
-    overflow-y: visible;
-  }
-  .arrow-icon {
-    rotate: 0deg;
-    top: 325px;
-    left: calc(50% - 15px);
-  }
-
-  #selectedRoute {
-    margin-top: 20px;
-    height: 60%;
-  }
-
-  /*when search bar hidden*/
-  .searchContainer__hidden {
-    width: 100%;
-    height: 100px;
-  }
-  .optionNav__hidden,
-  .routeContainer__hidden,
-  .scheduleContainer__hidden {
+  #departureHours {
     display: none;
+    width: 100vw;
+    height: 100vh;
+    left: 0px;
+    top: 0px;
   }
-
-  .arrow-icon__hidden {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: var(--cyan);
-    border: solid 1px var(--cyan);
-    border-radius: 30px;
-    rotate: -180deg;
-    left: calc(50% - 15px);
-    top: 20px;
-    z-index: 1;
-  }
-  .arrow-icon__hidden:hover,
-  .arrow-icon__hidden:focus {
-    cursor: pointer;
-    background-color: var(--cyan);
-    border: solid 1px var(--cyan);
+  #arrow-icon-hours {
+    top: 94%;
   }
 }

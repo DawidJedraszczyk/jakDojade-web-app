@@ -42,7 +42,7 @@
   overflow-y: scroll;
 }
 .selectRoute {
-  margin: 30px 0px;
+  margin: 10px 0px 20px 0px;
   font-size: 20px;
 }
 .selectRoute:hover {
@@ -107,5 +107,11 @@
   .scheduleContainer {
     top: calc(12%);
     overflow: auto;
+  }
+  #routes {
+    height: 70%;
+  }
+  .busName {
+    margin-bottom: 20px;
   }
 }
