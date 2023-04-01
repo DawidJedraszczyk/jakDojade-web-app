@@ -48,10 +48,9 @@ function changeVisibilityInSearchContainer(clicked) {
     document.getElementById("routeContainer").style.display = "block";
   }
 }
-
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", init, false);
+function init() {
   document.getElementById("arrow-icon").addEventListener("click", function () {
-    console.log("CHUJ DUPA CYCE");
     if (hiddenStatus) {
       hiddenStatus = false;
     } else {
@@ -60,10 +59,10 @@ window.onload = function () {
     changeHiddenClass();
   });
   document
-    .querySelector(".optionNav")
+    .getElementById("optionNav")
     .addEventListener("click", function (event) {
       clicked = event.target.className;
       changeCurrentlyClicked(clicked);
       changeVisibilityInSearchContainer(clicked);
     });
-};
+}

@@ -107,6 +107,7 @@
 @media screen and (max-width: 1000px) {
   .scheduleContainer {
     top: calc(12%);
+    height: 70%;
     overflow: auto;
   }
   #routes {
@@ -116,7 +117,7 @@
     margin-bottom: 20px;
   }
 }
-@media screen and (min-width: 800px) and (max-width: 1100px) {
+@media screen and (min-width: 800px) and (max-width: 1000px) {
   .routeContainer,
   .scheduleContainer {
     top: 75px;
