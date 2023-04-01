@@ -4,8 +4,9 @@
 .scheduleContainer {
   visibility: hidden;
   position: absolute;
-  top: calc(25%);
+  top: calc(50vh - 200px);
   width: 300px;
+  height: 400px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -113,5 +114,12 @@
   }
   .busName {
     margin-bottom: 20px;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 1100px) {
+  .routeContainer,
+  .scheduleContainer {
+    top: 75px;
+    font-size: 30px;
   }
 }

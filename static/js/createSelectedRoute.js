@@ -117,11 +117,11 @@ function showDetails(stopsData, firstBus, secondBus) {
     }
   }
   detailsContainer.style.display = "flex";
-  detailsContainer.style.width = "420px";
+  //detailsContainer.style.width = "420px";
   document
     .getElementById("arrow-icon-hours")
     .addEventListener("click", function () {
-      detailsContainer.style.width = "0px";
+      //detailsContainer.style.width = "0px";
       detailsContainer.style.display = "none";
     });
 }

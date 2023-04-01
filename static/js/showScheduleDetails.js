@@ -191,12 +191,12 @@ function createDepartureHours(busName, stopName, dir, listOfHours) {
     }
   }
   hoursContainer.style.display = "flex";
-  hoursContainer.style.width = "450px";
+  //hoursContainer.style.width = "450px";
   document
     .getElementById("arrow-icon-hours")
     .addEventListener("click", function () {
       hoursContainer.innerHTML = "";
-      hoursContainer.style.width = "0px";
+      //hoursContainer.style.width = "0px";
       hoursContainer.style.display = "none";
     });
 }
