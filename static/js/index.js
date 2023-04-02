@@ -19,7 +19,10 @@ function changeHiddenClass() {
     document.getElementById("scheduleContainer").className =
       "scheduleContainer";
     document.getElementById("searchContainer").className = "searchContainer";
-    document.getElementById("departureHours").style.left = "520px";
+    console.log(screen.width);
+    if (screen.width > 1000) {
+      document.getElementById("departureHours").style.left = "520px";
+    }
     document.getElementById("arrow-icon").className = "arrow-icon";
   }
 }

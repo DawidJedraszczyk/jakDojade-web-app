@@ -1,7 +1,5 @@
 import json
 import sys
-import requests
-import configparser
 import os
 sys.path.append(os.path.join(sys.path[0],'static','python'))
 import mainFile
@@ -68,7 +66,7 @@ def getHours():
     return options
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run()
 else:
     app.config.update(
         APPLICATION_ROOT='/',
