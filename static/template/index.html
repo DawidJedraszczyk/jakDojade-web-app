@@ -27,10 +27,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   </head>
   <body>
-    <div class="popup"><header><b>Ważne informacje!</b></header>
+    <div id="popup"><header><b>Ważne informacje!</b></header><button id="closePopup">zamknij</button>
     <div class="popupInformations"><p>Aplikacja jest napisana wolnym czasie, mogą się pojawiać błędy. Niestety dane w niej zawarte <b>nie sa oparte na realnych rozkładach jazdy</b>. Jeżeli będzie pozytywny odbiór postaram się nawiązać współpracę z MZK i rozwinać aplikację do realnych danych. Strona jest nadal w trakcie rozwoju, jeżeli zauważysz jakiś błąd lub masz pomysł co można do niej dodać napisz do mnie: <b>dawidjedraszczyk01@gmail.com</b>.</p><p>Prosiłbym o wyrozumiałość w sprawie błędów które znam: <ul><li>busy z literą w nazwie nie są brane pod uwagę w aplikacji, ponieważ nie uwzględniłem ich w algorytmie, oznacza to że nie zobaczysz ich trasy, godzin odjazdu i nie są brane pod uwagę w wyszukiwaniu trasy,</li><li>niektóre trasy mogą się nie zgadzać z rzeczywistymi, jest to związane z uproszczeniem dziłania algorytmy,</li><li>Może się zdarzyć, że trasa może się nie pojawić, ponieważ korzystam z wersji demo programu do rysowania trasy,</li></ul> </b></p></div>
     </div>
-    <div class="mainContainer">
+    <div id="mainContainer" class="mainContainer">
       <div id="searchContainer" class="searchContainer">
         <div id="optionNav" class="optionNav">
           <div id="route-btn" class="route-btn">Znajdź trasę</div>

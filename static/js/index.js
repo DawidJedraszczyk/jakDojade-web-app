@@ -69,3 +69,12 @@ function init() {
       changeVisibilityInSearchContainer(clicked);
     });
 }
+
+function popupClose() {
+  let buttonPopup = document.getElementById("closePopup");
+  buttonPopup.addEventListener("click", function () {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("mainContainer").style.filter = "blur(0px)";
+  });
+}
+popupClose();
