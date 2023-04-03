@@ -22,12 +22,34 @@
   border-radius: 100px;
 }
 body {
-  position: absolute;
   font-family: "Poppins", sans-serif;
   width: 100vw;
   height: 100vh;
   color: var(--text-color);
   background-color: var(--background);
+}
+.popup header {
+  margin-bottom: 30px;
+}
+.popup {
+  white-space: pre-wrap;
+  padding: 50px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  z-index: 2;
+  position: absolute;
+  left: 20vw;
+  top: 30%;
+  width: 60vw;
+  background-color: #dad9d9;
+  border-radius: 20px;
+  -webkit-box-shadow: -2px 3px 14px 0px rgba(237, 60, 60, 1);
+  -moz-box-shadow: -2px 3px 14px 0px rgba(237, 60, 60, 1);
+  box-shadow: -2px 3px 14px 0px rgba(237, 60, 60, 1);
 }
 
 #map {
@@ -84,6 +106,7 @@ body {
   font-size: 20px;
 }
 .mainContainer {
+  filter: blur(0px);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -325,7 +348,15 @@ body {
   }
 }
 @media screen and (max-width: 1000px) {
+  .popup {
+    display: none;
+    top: 10px;
+    left: 10vw;
+    width: 70vw;
+    height: 90vh;
+  }
   .mainContainer {
+    filter: blur(0px);
     position: relative;
     flex-direction: column;
     justify-content: center;
@@ -416,10 +447,10 @@ body {
 }
 @media screen and (min-width: 800px) and (max-width: 1000px) {
   .searchContainer {
-    height: 35%;
+    height: 400px;
   }
   .optionNav {
-    font-size: 35px;
+    font-size: 28px;
   }
   .arrow-icon {
     top: 88%;
