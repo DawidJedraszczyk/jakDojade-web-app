@@ -75,6 +75,7 @@ function popupClose() {
   buttonPopup.addEventListener("click", function () {
     document.getElementById("popup").style.display = "none";
     document.getElementById("mainContainer").style.filter = "blur(0px)";
+    document.getElementById("mainContainer").style.pointerEvents = "all";
   });
 }
 popupClose();
