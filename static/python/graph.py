@@ -1,98 +1,97 @@
-import arrays
-import buses
-import json
+import mysql.connector
 
-with open('static/python/addBusList.json', 'r') as file:
-    busesArr = json.load(file)
+mydb = mysql.connector.connect(
+    host="localhost",
+    port=3306,
+    user="root",
+    password="Dragon11",
+    database="jakdojade"
+)
+mycursor = mydb.cursor()
 
 class Graph(object):
     def __init__(self, numberOfBuses):
         self.numberOfBuses = numberOfBuses
-        self.busesNames = []
-        self.busObjects = {}
-
-    def add_bus(self, busName, numberOfBus, numberOfStops):
-        self.busesNames.append(numberOfBus)
-        bus = buses.bus(numberOfBus, numberOfStops)
-        self.busObjects[busName] = bus
-
-    def add_stop_dict(self, busName, stopName, direction):
-        self.busObjects[busName].add_stop_dict(stopName, direction)
-
-    def add_connection_between_stops_dict(self, busName, direction):
-        self.busObjects[busName].add_connection_between_stops(direction)
-
-    def add_hour_dict(self, busName, stopName, hour, direction):
-        self.busObjects[busName].add_hours_dict(stopName, hour, direction)
 
     def get_other_buses_from_same_stop(self, stopName):
-        listOfBuses = []
-        for index in range(len(busesArr['buses'])):
-            #busName = arrays.addBusList[index][0]
-            busName = busesArr['buses'][index]['busName']
-            stops1 = self.busObjects[busName].get_stops_dict(1)
-            stops2 = self.busObjects[busName].get_stops_dict(2)
-            if (stopName in stops1) or (stopName in stops2):
-                listOfBuses.append(busName)
-        return(listOfBuses)
+        mycursor.execute(
+            "SELECT id_linii FROM przystanki JOIN odjazd ON przystanki.ID_PRZYSTANKU = odjazd.id_przystanku WHERE przystanki.nazwa_przystanku = %s GROUP BY id_linii",
+            (stopName,))
+        res = mycursor.fetchall()
+        bus_ids = [item[0] for item in res]
+        return bus_ids
 
-    def get_hours(self, busName, stopName, direction):
-        self.busObjects[busName].get_hours(stopName, direction)
+    def print_hours(self, busId, stopName, direction):
+        mycursor.execute(
+            "select godzina_odjazdu from przystanki join odjazd on przystanki.ID_PRZYSTANKU = odjazd.id_przystanku where przystanki.nazwa_przystanku = %s and odjazd.id_linii = %s and odjazd.kierunek = %s",
+            (stopName, busId, direction))
+        res = mycursor.fetchall()
+        hours = [item[0].split(':') for item in res]
+        print(hours)
 
-    def return_hours(self, busName, stopName, direction):
-        return self.busObjects[busName].return_hours(stopName, direction)
-
-    def get_connected_stops(self, busName):
-        matrix = (self.busObjects[busName].get_connected_stops())
-        for index in matrix:
-            row = []
-            for index2 in index:
-                row.append(index2)
-            print(*row, sep=" ")
+    def get_hours(self, busId, stopName, direction):
+        mycursor.execute(
+            "select godzina_odjazdu from przystanki join odjazd on przystanki.ID_PRZYSTANKU = odjazd.id_przystanku where przystanki.nazwa_przystanku = %s and odjazd.id_linii = %s and odjazd.kierunek = %s",
+            (stopName, busId, direction))
+        res = mycursor.fetchall()
+        hours = [item[0].split(':') for item in res]
+        return hours
 
     def get_buses(self):
-        return self.busesNames
+        mycursor.execute(
+            "select id_linii from linie_autobusowe")
+        res = mycursor.fetchall()
+        buses = [item[0] for item in res]
+        return buses
 
-    def checkDepartureHours(self, busName, firstStation, direction, setMinHour, setMinMinute):
-        firstStationDepartureHours = self.return_hours(busName, firstStation, direction)
-
-        firstStationHour = 0
-        firstStationMinute = 0
-
-        for clock in firstStationDepartureHours:
-            firstStationHour = clock[0]
-            firstStationMinute = clock[1]
-            if (firstStationHour > setMinHour or (firstStationHour == setMinHour and firstStationMinute >= setMinMinute)):
-                break
-        return firstStationHour, firstStationMinute
+    def checkDepartureHours(self, busId, firstStation, direction, setMinHour, setMinMinute):
+        hour = str(setMinHour) + ':' + str(setMinMinute)
+        mycursor.execute(
+            "SELECT Godzina_odjazdu FROM odjazd JOIN przystanki ON odjazd.ID_PRZYSTANKU = przystanki.ID_PRZYSTANKU WHERE odjazd.id_linii = %s AND przystanki.NAZWA_PRZYSTANKU = %s AND kierunek = %s AND GODZINA_ODJAZDU >= %s LIMIT 1",
+            (busId, firstStation, direction, hour))
+        res = mycursor.fetchone()
+        depHour, depMin = [int(item) for item in res[0].split(":")]
+        return depHour, depMin
 
     def get_all_stops(self):
-        stops = []
-        for index in range(len(arrays.addBusList)):
-            busName = arrays.addBusList[index][0]
-            stopsTmp1 = self.busObjects[busName].get_stops_dict(1)
-            stopsTmp2 = self.busObjects[busName].get_stops_dict(2)
-            for index2 in stopsTmp1:
-                if index2 not in stops:
-                    stops.append(index2)
-            for index2 in stopsTmp2:
-                if index2 not in stops:
-                    stops.append(index2)
-        stops.sort()
-        return(stops)
+        mycursor.execute("select NAZWA_PRZYSTANKU from przystanki order by nazwa_przystanku")
+        res = mycursor.fetchall()
+        allStops = [item[0] for item in res]
+        return allStops
+
+    def calculate_time_difference_in_minutes(self, start_time, end_time):
+        start_hour, start_minute = map(int, start_time.split(':'))
+        end_hour, end_minute = map(int, end_time.split(':'))
+        total_start_minutes = start_hour * 60 + start_minute
+        total_end_minutes = end_hour * 60 + end_minute
+        time_difference = total_end_minutes - total_start_minutes
+        return time_difference
+
+    def get_time_between_stops_algorithm(self, firstStation, lastStation, busId, direction):
+        mycursor.execute("select godzina_odjazdu from przystanki join odjazd on przystanki.ID_PRZYSTANKU = odjazd.id_przystanku where id_linii = %s and kierunek = %s and nazwa_przystanku = %s LIMIT 1", (busId, direction, firstStation,))
+        res = mycursor.fetchall()
+        firstTime = [item[0] for item in res]
+        mycursor.execute("select godzina_odjazdu from przystanki join odjazd on przystanki.ID_PRZYSTANKU = odjazd.id_przystanku where id_linii = %s and kierunek = %s and nazwa_przystanku = %s LIMIT 1", (busId, direction, lastStation,))
+        res = mycursor.fetchall()
+        secondTime = [item[0] for item in res]
+        time_diff = self.calculate_time_difference_in_minutes(firstTime[0], secondTime[0])
+        return time_diff
 
 
-    def get_time_between_stops_algorithm(self, firstStation, lastStation, busName, direction):
-        return self.busObjects[busName].get_time_between_stops_algorithm(firstStation, lastStation, direction)
+    def get_stops_dict(self, busId, direction):
+        mycursor.execute("select NAZWA_PRZYSTANKU from przystanki join odjazd on przystanki.ID_PRZYSTANKU = odjazd.id_przystanku where id_linii = %s and kierunek = %s group by NAZWA_PRZYSTANKU", (busId, direction,))
+        res = mycursor.fetchall()
+        allStops = [item[0] for item in res]
+        return allStops
 
+    def get_name_of_stop_dict(self, index):
+        mycursor.execute("select NAZWA_PRZYSTANKU from przystanki where id_przystanku = %s", (index,))
+        res = mycursor.fetchone()
+        stopName = res[0]
+        return stopName
 
-    def get_stops_dict(self, busName, direction):
-        return self.busObjects[busName].get_stops_dict(direction)
-
-    def calculate_next_stops_hours(self, busName):
-        self.busObjects[busName].calculate_next_stops_hours()
-        self.busObjects[busName].calculate_next_stops_hours_second_direction()
-        self.busObjects[busName].create_matrix()
-
-    def get_name_of_stop_dict(self, busName, index, direction):
-        self.busObjects[busName].get_name_of_stop_dict(index, direction)
+    def get_name_of_stop_in_bus(self, index, busId, direction):
+        mycursor.execute("select NAZWA_PRZYSTANKU from przystanki join odjazd on przystanki.ID_PRZYSTANKU = odjazd.id_przystanku where numer_porządkowy = %s and id_linii = %s and kierunek = %s group by nazwa_przystanku", (index, busId, direction,))
+        res = mycursor.fetchone()
+        stopName = res[0]
+        return stopName

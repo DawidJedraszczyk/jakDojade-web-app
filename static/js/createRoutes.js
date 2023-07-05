@@ -30,19 +30,21 @@ function createElements(array) {
       var deportureMinute = "0" + arrayElement["firstStationHour"][1];
     }
     if (arrayElement["secondBus"] != null) {
-      var busNr1 = arrayElement["firstBus"].split("r");
-      var busNr2 = arrayElement["secondBus"].split("r");
+        console.log(arrayElement);
+      var busNr1 = arrayElement["firstBus"];
+      var busNr2 = arrayElement["secondBus"];
       var buses =
         '<div class="buses"><div class="busImgAndNumber"><img id="id1" src="/static/img/bus-icon.svg" /><p class="busesP">' +
-        busNr1[1] +
+        busNr1 +
         '</p><img id="id1" src="/static/img/bus-icon.svg" /><p class="busesP">' +
-        busNr2[1] +
+        busNr2 +
         "</p></div></div>";
     } else {
-      var busNr1 = arrayElement["firstBus"].split("r");
+        console.log(arrayElement);
+      var busNr1 = arrayElement["firstBus"];
       var buses =
         '<div class="buses"><div class="busImgAndNumber"><img id="id1" src="/static/img/bus-icon.svg" /><p class="busesP">' +
-        busNr1[1] +
+        busNr1 +
         "</p></div></div>";
     }
     let lastStationArivalHour = arrayElement["lastStationArivalHour"][0];
